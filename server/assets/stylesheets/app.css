@@ -1,0 +1,16 @@
+:root{
+    font-size: 1px;
+}
+
+h1{
+    margin:5rem;
+    padding:5rem;
+    font-size:25rem;
+    font-weight:bold;
+}
+
+p{
+    margin:3rem;
+    padding:3rem;
+    font-size:20rem;
+}

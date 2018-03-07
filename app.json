@@ -1,0 +1,8 @@
+{
+  "name": "lichessapps",
+  "description": "Third party applications that are linked to online chess playing interface lichess.",
+  "repository": "https://github.com/lichessapps/heroku",
+  "logo": "https://avatars3.githubusercontent.com/u/37112125?s=40&v=4",
+  "keywords": ["lichess", "apps"],
+  "image": "heroku/nodejs"
+}
