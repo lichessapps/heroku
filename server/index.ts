@@ -1,5 +1,7 @@
 // server startup
 
+const app = express()
+
 app.use(morgan('combined'))
 app.use(express.static('server/assets'))
 
