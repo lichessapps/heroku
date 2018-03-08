@@ -79,6 +79,17 @@ class DevBot extends DiscordBot{
             })
         }
 
+        if(command=="perf"){
+            let username=args[0]||""
+            let variant=args[1]||"atomic"
+
+            new LichessGames(username,100,1).fetch((lg:LichessGames)=>{
+                let msg=lg.statsAsDiscordString(variant)
+                console.log(msg)
+                message.channel.send(msg)
+            })
+        }
+
     }
 
 }
