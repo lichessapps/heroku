@@ -54,6 +54,9 @@
   },  
   "files": [    
     "server/head.ts",    
+    "server/lichess.ts",    
+    "server/discordbot.ts",    
+    "server/discord.ts",    
     "server/index.ts"
   ]
 }
