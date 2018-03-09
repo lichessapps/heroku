@@ -54,6 +54,7 @@
   },  
   "files": [    
     "server/head.ts",    
+    "server/mongo.ts",    
     "server/chart.ts",    
     "server/lichess.ts",  
     "server/vplayers.ts",  

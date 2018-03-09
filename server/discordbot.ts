@@ -123,7 +123,7 @@ class DevBot extends DiscordBot{
         }else if(command=="cmp"){
             message.channel.send(commandNotImplementedMessage(command))
         }else if(command=="ls"){
-            message.channel.send(commandNotImplementedMessage(command))
+            lichessStats(message)
         }else if(command=="reset"){
             message.channel.send(commandNotImplementedMessage(command))
         }else if(command=="fen"){

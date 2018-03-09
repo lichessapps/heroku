@@ -8,6 +8,7 @@ const Discord = require("discord.js")
 const fetch_ = require("node-fetch")
 const pimg = require("pureimage")
 const fs = require("fs")
+const mongodb = require("mongodb")
 
 let ONE_SECOND = 1000 //ms
 let ONE_MINUTE = 60 * ONE_SECOND
@@ -22,6 +23,12 @@ function isDev(){
 }
 
 console.log(`application started in ${isProd()?"production":"development"} mode`)
+
+const DATABASE_NAME=`mychessdb`
+
+const LOCAL_MONGO_URI=`mongodb://localhost:27017/${DATABASE_NAME}`
+
+const MONGODB_URI = ((isProd()||true)?process.env.MONGODB_URI:LOCAL_MONGO_URI)||LOCAL_MONGO_URI
 
 const PORT = process.env.PORT || 5000
 
