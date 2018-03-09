@@ -393,10 +393,11 @@ class LichessGames{
         return content
     }
 
-    ratingData():number[]{
-        let ratings=this.games.map((game:LichessGame)=>game.ratingForUser(this.username))        
-        if(this.games.length>0){
-            let lastgame=this.games[0]
+    ratingData(variant:string):number[]{
+        let filtered=this.games.filter((game:LichessGame)=>game.variant==variant)
+        let ratings=filtered.map((game:LichessGame)=>game.ratingForUser(this.username))        
+        if(filtered.length>0){
+            let lastgame=filtered[0]
             let lastrating=lastgame.ratingForUser(this.username)
             let lastratingdiff=lastgame.ratingDiffForUser(this.username)            
             ratings.unshift(lastrating+lastratingdiff)

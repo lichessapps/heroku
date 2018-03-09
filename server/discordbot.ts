@@ -91,7 +91,7 @@ class DevBot extends DiscordBot{
                     console.log(msg)
                     message.channel.send(msg)
 
-                    let ratings=lg.ratingData()
+                    let ratings=lg.ratingData(variant)
 
                     createChart(
                         {
