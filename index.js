@@ -266,7 +266,7 @@ class LichessProfile {
             let perf = this.perfs[variant];
             if (perf.games <= 0)
                 return "";
-            let vpref = variant == "atomic" ? "**" : "*";
+            let vpref = variant == DEFAULT_VARIANT ? "**" : "*";
             return `${vpref}${variant}${vpref} : rating : **${perf.rating}** , games : __${perf.games}__ , rd : ${perf.rd} , progress : ${perf.prog}\n`;
         }).join("");
         content += perfsContent;
@@ -331,9 +331,9 @@ class LichessGame {
     constructor() {
         this.id = "";
         this.rated = true;
-        this.variant = "atomic";
+        this.variant = DEFAULT_VARIANT;
         this.speed = "blitz";
-        this.perf = "atomic";
+        this.perf = DEFAULT_VARIANT;
         this.createdAt = new Date().getTime();
         this.createdAtF = new Date(this.createdAt).toLocaleString();
         this.lastMoveAt = new Date().getTime();
@@ -557,7 +557,7 @@ class LichessGames {
             `won **${this.wins}** game(s), lost **${this.losses}** game(s), drawn **${this.draws}** game(s)\n` +
             `min rating **${this.minRating}** , max rating **${this.maxRating}** , average rating **${this.avgRating.toLocaleString()}**\n` +
             `showing last ${showing} games\n\n`;
-        let gamesContent = this.games.slice(0, showing).map((game) => game.asDiscordStringForUser(this.username)).join("\n");
+        let gamesContent = this.games.filter((game) => game.variant == variant).slice(0, showing).map((game) => game.asDiscordStringForUser(this.username)).join("\n");
         content += gamesContent;
         return content;
     }

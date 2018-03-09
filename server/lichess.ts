@@ -89,7 +89,7 @@ class LichessProfile{
         let perfsContent:string=Object.keys(this.perfs).map((variant:string)=>{
             let perf=this.perfs[variant]
             if(perf.games<=0) return ""
-            let vpref=variant=="atomic"?"**":"*"
+            let vpref=variant==DEFAULT_VARIANT?"**":"*"
             return `${vpref}${variant}${vpref} : rating : **${perf.rating}** , games : __${perf.games}__ , rd : ${perf.rd} , progress : ${perf.prog}\n`
         }).join("")
 
@@ -152,9 +152,9 @@ class LichessPlayers{
 class LichessGame{
     id:string=""
     rated:boolean=true
-    variant:string="atomic"
+    variant:string=DEFAULT_VARIANT
     speed:string="blitz"
-    perf:string="atomic"
+    perf:string=DEFAULT_VARIANT
     createdAt:number=new Date().getTime()
     createdAtF:string=new Date(this.createdAt).toLocaleString()
     lastMoveAt:number=new Date().getTime()
@@ -386,7 +386,7 @@ class LichessGames{
             `min rating **${this.minRating}** , max rating **${this.maxRating}** , average rating **${this.avgRating.toLocaleString()}**\n`+
             `showing last ${showing} games\n\n`
 
-        let gamesContent=this.games.slice(0,showing).map((game:LichessGame)=>game.asDiscordStringForUser(this.username)).join("\n")
+        let gamesContent=this.games.filter((game:LichessGame)=>game.variant==variant).slice(0,showing).map((game:LichessGame)=>game.asDiscordStringForUser(this.username)).join("\n")
 
         content+=gamesContent
 
