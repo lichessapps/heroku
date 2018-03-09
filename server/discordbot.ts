@@ -143,7 +143,7 @@ class DevBot extends DiscordBot{
         }else if(command=="top"){
             message.channel.send(commandNotImplementedMessage(command))
         }else if(command=="users"){
-            message.channel.send(commandNotImplementedMessage(command))
+            usersStats(this.client,args,message)
         }else{
             message.channel.send(unknownCommandMessage(command))
         }
