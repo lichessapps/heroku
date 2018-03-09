@@ -81,12 +81,35 @@ class DevBot extends DiscordBot{
 
         if(command=="perf"){
             let username=args[0]||""
-            let variant=args[1]||"atomic"
+            let variant=args[1]||DEFAULT_VARIANT
 
             new LichessGames(username,100,1).fetch((lg:LichessGames)=>{
-                let msg=lg.statsAsDiscordString(variant)
-                console.log(msg)
-                message.channel.send(msg)
+                if(lg.invalid){
+                    message.channel.send(errorMessage(`There was a problem finding **${variant}** games for **${username}**.`))
+                }else{
+                    let msg=lg.statsAsDiscordString(variant)
+                    console.log(msg)
+                    message.channel.send(msg)
+
+                    let ratings=lg.ratingData()
+
+                    createChart(
+                        {
+                            name:username,
+                            data:ratings,
+                            FOLDER:"perfs",
+                            MOVING_AVERAGE:10
+                        },function(){            
+                            setTimeout((e:any)=>{
+                                message.channel.send(hostRndUrl(
+                                `images/perfs/${username}.png`
+                                ))
+                            },2000)      
+                        },function(){
+                            message.channel.send(errorMessage("Could not create chart."))
+                        }
+                    )
+                }                
             })
         }
 

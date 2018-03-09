@@ -1,3 +1,6 @@
+assets/images/charts/*.png
+assets/images/perfs/*.png
+
 # Node build artifacts
 node_modules
 npm-debug.log
