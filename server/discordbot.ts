@@ -65,9 +65,7 @@ class DevBot extends DiscordBot{
 
         if(command=="test"){
             message.channel.send(`test ${args}`)
-        }
-
-        if(command=="p"){
+        }else if(command=="p"){
             let username=args[0]||""
             new LichessProfile(username).fetch((p:LichessProfile)=>{
                 console.log(p)
@@ -77,9 +75,7 @@ class DevBot extends DiscordBot{
                     message.channel.send(msg)
                 }
             })
-        }
-
-        if(command=="perf"){
+        }else if(command=="perf"){
             let username=args[0]||""
             let variant=args[1]||DEFAULT_VARIANT
 
@@ -111,6 +107,45 @@ class DevBot extends DiscordBot{
                     )
                 }                
             })
+        }else if(command=="vp"){
+            let vp=variantPlayers
+            let variants=Object.keys(vp)    
+            variants.sort((a,b)=>vp[b]-vp[a])
+            let content=""
+            for(let variant of variants){
+                let num=vp[variant]
+                let pref=variant==DEFAULT_VARIANT?"**":"*"      
+                let disp=VARIANT_DISPLAY_NAMES[variant]
+                content+=
+                    `${pref}${disp}${pref} , players this week: **${num}**\n`
+            }
+            message.channel.send(content)
+        }else if(command=="cmp"){
+            message.channel.send(commandNotImplementedMessage(command))
+        }else if(command=="ls"){
+            message.channel.send(commandNotImplementedMessage(command))
+        }else if(command=="reset"){
+            message.channel.send(commandNotImplementedMessage(command))
+        }else if(command=="fen"){
+            message.channel.send(commandNotImplementedMessage(command))
+        }else if((command=="show")||(command=="s")||(command=="board")||(command=="b")||(command=="+")){
+            message.channel.send(commandNotImplementedMessage(command))
+        }else if(command=="del"){
+            message.channel.send(commandNotImplementedMessage(command))
+        }else if(command=="ver"){
+            message.channel.send(commandNotImplementedMessage(command))
+        }else if(command=="check"){
+            message.channel.send(commandNotImplementedMessage(command))
+        }else if(command=="unver"){
+            message.channel.send(commandNotImplementedMessage(command))
+        }else if(command=="say"){
+            message.channel.send(commandNotImplementedMessage(command))
+        }else if(command=="top"){
+            message.channel.send(commandNotImplementedMessage(command))
+        }else if(command=="users"){
+            message.channel.send(commandNotImplementedMessage(command))
+        }else{
+            message.channel.send(unknownCommandMessage(command))
         }
 
     }
