@@ -63,7 +63,14 @@ class DevBot extends DiscordBot{
 
     execCommand(message:any,command:string,args:string[]){
 
-        if(command=="test"){
+        let hasMainBot:boolean=false
+        iterateUsers(this.client,(user:any)=>{
+            if(user.bot&&(user.username=="TestBot")) hasMainBot=true
+        })
+
+        if(hasMainBot){
+            message.channel.send(`Detected main bot. Not servicing command.`)
+        }else if(command=="test"){
             message.channel.send(`test ${args}`)
         }else if(command=="p"){
             let username=args[0]||""

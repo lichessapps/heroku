@@ -796,7 +796,15 @@ class DevBot extends DiscordBot {
         super(DISCORDDEVBOT_TOKEN);
     }
     execCommand(message, command, args) {
-        if (command == "test") {
+        let hasMainBot = false;
+        iterateUsers(this.client, (user) => {
+            if (user.bot && (user.username == "TestBot"))
+                hasMainBot = true;
+        });
+        if (hasMainBot) {
+            message.channel.send(`Detected main bot. Not servicing command.`);
+        }
+        else if (command == "test") {
             message.channel.send(`test ${args}`);
         }
         else if (command == "p") {
@@ -890,6 +898,16 @@ class DevBot extends DiscordBot {
         else {
             message.channel.send(unknownCommandMessage(command));
         }
+    }
+}
+function iterateUsers(client, iterFunc) {
+    let users = client.users;
+    let ids = users.keys();
+    let ida = Array.from(ids);
+    for (let i = 0; i < ida.length; i++) {
+        let id = ida[i];
+        let user = users.get(id);
+        iterFunc(user);
     }
 }
 function usersStats(client, args, message) {

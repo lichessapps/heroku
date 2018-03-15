@@ -1,3 +1,14 @@
+function iterateUsers(client:any,iterFunc:any){
+    let users=client.users    
+    let ids=users.keys()
+    let ida=Array.from(ids)
+    for(let i=0;i<ida.length;i++){
+        let id=ida[i]
+        let user=users.get(id)
+        iterFunc(user)
+    }
+}
+
 function usersStats(client:any,args:string[],message:any){
     let CHUNK=50
     let pageArg=args[0]
